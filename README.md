@@ -5,17 +5,27 @@ parallel redundant encoding model (PREM) for optimizing compression raio, memory
 Moreover, the PQSDC2 compression procedure can be expedited by employing a multi-core CPU cluster, 
 thereby substantially decreasing time overhead.
 
+## Experimental Environment 
+Before compression and decompression, the code programming environment for the experiment is as follows:
+
+torch : >= 1.10.1+cu111
+  
+GCC : >= 13.1.0
+
+OpenMPI : >= 2.1.2
+  
+Slurm : >= 19.05.5-1.0.0-29 (Optional Environment for Clustering Parallel)
 ## Copy Our Project
 
-Firstly, clone our tools from GitHub:
+Firstly, clone our PQSDC2 compressor from GitHub:
 ```shell script
 git clone https://github.com/wind-Zheng/PQSDC2.git
 ```
-Secondly, turn to src directory：
+Secondly, turn to the src directory: 
 ```shell script
 cd PQSDC2/src
 ```
-Thirdly, Run the following command：
+Thirdly, run the following command:
 ```shell script
 bash install.sh
 ```
@@ -26,14 +36,14 @@ export PQSDC2_PATH="`pwd`/"
 source ~/.bashrc
 ```
 
-## Usage
+## pqsdc Usage
 ```sh
     Basic Useage: PQSDC2.sh [command option]
-       c [parnum] [threads] [qualities file]                     *compression mode.
-       d [parnum] [threads] [pqsdc2 generate directory]          *decompression mode.
+       c [parnum] [threads] [qualities file]              *compression mode.
+       d [parnum] [threads] [pqsdc2 generate directory]   *decompression mode.
     Cluster Useage: pqsdc2_cluster.slurm [command option]
-       -c [parnum] [threads] [qualities file]                    *compression mode.
-       -d [parnum] [threads] [qualities file]                    *decompression mode.
+       -c [parnum] [threads] [qualities file]             *compression mode.
+       -d [parnum] [threads] [qualities file]             *decompression mode.
     Advanced Usage:pqsdc_tools [command option]
        -fileinfo [input-fastq-file]                       *print basic statistic information.
        -dirinfo [input-dir-name]                          *print basic statistic information.
@@ -49,7 +59,7 @@ source ~/.bashrc
 ```
 
 ## Examples
-We present the validation dataset `PQSDC2/data/test.qualities` 
+We present the validation dataset at `PQSDC2/data/test.qualities` 
 #### 1、Using 8 CPU cores for compression.
 ```sh
 cd ${PQSDC2_PATH}
@@ -94,25 +104,19 @@ sbatch -p [paitition] -N 4 -c 6 -n 4 -e cluster/test_4_c.err -o cluster/test_4_c
 sbatch -p [paitition] -N 4 -c 6 -n 4 -e cluster/test_4_c.err -o cluster/test_4_c.out ../src/pqsdc2_cluster.slurm -d 4 4 test.qualities
 ```
 ## Our Experimental Configuration
-Our experiment was conducted on the SUGON-7000A supercomputer system at the Nanning Branch of the National Supercomputing Center, using a queue of CPU/GPU heterogeneous computing nodes. The compute nodes used in the experiment were configured as follows: 
+Our experiment was conducted on a SUGON-7000A supercomputer system at the Nanning Branch of the National Supercomputing Center, 
+using a queue of CPU/GPU heterogeneous computing nodes. 
+The compute nodes used in the experiment were configured as follows: 
   
-  2\*Intel Xeon Gold 6230 CPU (2.1Ghz, total 40 cores), 
+2\*Intel Xeon Gold 6230 CPU (2.1Ghz, total 40 cores), 
   
-  2\*NVIDIA Tesla-T4 GPU (16GB CUDA memory, 2560 CUDA cores), 
+2\*NVIDIA Tesla-T4 GPU (16GB CUDA memory, 2560 CUDA cores), 
   
-  512GB DDR4 memory, and 
+512GB DDR4 memory, and 
   
-  8\*900GB external storage.
+8\*900GB external storage.
 
-In addition to this, the code programming environment for the experiment is as follows:
 
-  torch : 1.10.1+cu111
-  
-  GCC ： 13.1.0
-
-  Open Mpi : 2.1.2
-  
-  Slurn : 19.05.5-1.0.0-29
   
 ## Dataset Acquisition
 We experimentally evaluated using the real publicly available sequencing datasets from the NCBI database.
@@ -128,6 +132,6 @@ Dataset download and extraction using the `SRA-Tools：https://github.com/ncbi/s
 
 ## Additional Information
 
-**Authors:**     NBJL-BioGrop.
+**Authors:**     NBJL-AIGrop.
 
 **Contact us:**  https://nbjl.nankai.edu.cn OR zhengyf@nbjl.nankai.edu.cn OR sunh@nbjl.naikai.edu.cn
