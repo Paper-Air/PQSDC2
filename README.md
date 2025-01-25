@@ -134,4 +134,4 @@ Dataset download and extraction using the `SRA-Tools：https://github.com/ncbi/s
 
 **Authors:**     NBJL-AIGrop.
 
-**Contact us:**  https://nbjl.nankai.edu.cn OR zhengyf@nbjl.nankai.edu.cn OR sunh@nbjl.naikai.edu.cn
+**Contact us:**  https://nbjl.nankai.edu.cn OR zhengyf@nbjl.nankai.edu.cn OR sunh@nbjl.nankai.edu.cn
